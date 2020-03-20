@@ -1,16 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native'
+import {  View } from 'react-native';
+import { globalStyles } from '../styles/global';
 
 export default function About() {
     return (
-        <View style={styles.container}> 
+        <View style={ globalStyles.container }>
             About
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        padding: 24
-    }
-})
