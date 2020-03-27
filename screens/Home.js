@@ -14,7 +14,7 @@ export default function Home({navigation}) {
         },
         {
             title: 'Warzone', 
-            rating: 5,
+            rating: 2,
             body: 'Warzone its a good game',
             key: 2
         },
