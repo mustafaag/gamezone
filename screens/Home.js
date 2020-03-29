@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, FlatList, TouchableOpacity, Text } from 'react-native';
+import { View, FlatList, TouchableOpacity, Text, Modal, StyleSheet } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Card from '../shared/Card';
+import {MaterialIcons} from '@expo/vector-icons';
 
 export default function Home({navigation}) {
+
+    const [modalOpen, setModalOpen] = useState(false);
 
     const [reviews, setReviews]= useState([
         {
@@ -28,6 +31,26 @@ export default function Home({navigation}) {
 
     return (
         <View style={ globalStyles.container}> 
+        
+        <Modal visible={modalOpen} animationType='slide'>
+            <View style={ {...globalStyles.modalContent, ...styles.modalClose}} >
+                <MaterialIcons
+                    style={globalStyles.modalToggle}
+                    name="close"
+                    size={24}
+                    onPress={()=>{setModalOpen(false)}}
+                />
+                <Text>Hello from the modal</Text>
+            </View>
+
+        </Modal>
+        <MaterialIcons
+            name="add"
+            size={24}
+            onPress={()=>{setModalOpen(true)}}
+            style={globalStyles.modalToggle}
+        />
+
         <FlatList 
             data={reviews}
             renderItem={({item}) => (
@@ -44,3 +67,9 @@ export default function Home({navigation}) {
     )
 }
 
+const styles = StyleSheet.create({
+    modalClose: {
+        marginTop: 20,
+        marginBottom: 0
+    }
+})
