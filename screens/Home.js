@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
-import { View, FlatList, TouchableOpacity, Text, Modal, StyleSheet } from 'react-native';
+import { View, FlatList, TouchableOpacity, Text, Modal, StyleSheet, Keyboard,TouchableWithoutFeedback } from 'react-native';
 import { globalStyles } from '../styles/global';
 import Card from '../shared/Card';
 import {MaterialIcons} from '@expo/vector-icons';
+import ReviewForm from './ReviewForm';
+
 
 export default function Home({navigation}) {
 
     const [modalOpen, setModalOpen] = useState(false);
 
+    const addReview = (review) =>{
+        review.key = Math.random().toString();
+        setReviews((currentReviews) =>{
+            return [review, ...currentReviews];
+        });
+
+        setModalOpen(false);
+    }
     const [reviews, setReviews]= useState([
         {
             title: 'Pokemon', 
@@ -33,6 +43,8 @@ export default function Home({navigation}) {
         <View style={ globalStyles.container}> 
         
         <Modal visible={modalOpen} animationType='slide'>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>               
+            
             <View style={ {...globalStyles.modalContent, ...styles.modalClose}} >
                 <MaterialIcons
                     style={globalStyles.modalToggle}
@@ -40,9 +52,9 @@ export default function Home({navigation}) {
                     size={24}
                     onPress={()=>{setModalOpen(false)}}
                 />
-                <Text>Hello from the modal</Text>
+                <ReviewForm addReview = {addReview}/>
             </View>
-
+            </TouchableWithoutFeedback>
         </Modal>
         <MaterialIcons
             name="add"

@@ -24,6 +24,14 @@ export const globalStyles = StyleSheet.create({
         padding:10,
         borderRadius: 10,
         alignSelf:'center'
+    },
+    input: {
+        borderWidth: 1,
+        borderColor: '#ddd',
+        padding: 10,
+        fontSize: 18,
+        borderRadius: 6,
+
     }
 })
 
